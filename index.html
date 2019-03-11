@@ -1,0 +1,49 @@
+
+<html>
+<head>
+	<meta charset="utf-8" />
+    <!--<script type="text/javascript" src="../lib/js/jquery-1.9.0.min.js"></script>-->
+    <script type="text/javascript" src="jquery.js" ></script>
+    <title>文件上传</title>
+</head>
+<body>
+    <div style="align-items: center;align-content: center;">
+        <h1>文件上传</h1>
+        <form id="form" method="post" enctype="multipart/form-data">
+            <p>请选择要上传的文件:</p>
+            <input id="file" name="files" type="file" multiple="multiple"/>
+            <br>
+            <input id="upload" name="upload" type="button" value="上传">
+        </form>
+    </div>
+</body>
+<script>
+    $(window).ready(function () {
+        $("#upload").click(function () {
+           var formData = new FormData($('#form')[0]);//获取表单中的文件
+           //ajax请求
+           $.ajax({
+               url:"https://www.sxscott.com/crazyBird/upload/pic",//后台的接口地址
+               type:"post",//post请求方式
+               data:formData,//参数
+               cache: false,
+               processData: false,
+               contentType: false,
+               headers : {
+               	Authorization:'KvKXRv9FM+jK4YozNx77GmtF4XwtFXAev6z6OTPvFSMcYTRwNFl9iSX4kdzCSir7'
+               },
+//				beforeSend: function(xhr) {
+
+//				xhr.setRequestHeader("Authorization", "KvKXRv9FM+jK4YozNx77GmtF4XwtFXAev6z6OTPvFSMcYTRwNFl9iSX4kdzCSir7");
+//				
+//				},
+               success:function (data) {
+                   console.log(data);
+               },error:function () {
+                   alert("操作失败~");
+               }
+           })
+        });
+    });
+</script>
+</html>
